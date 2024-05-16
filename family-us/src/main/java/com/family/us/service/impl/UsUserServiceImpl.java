@@ -2,23 +2,23 @@ package com.family.us.service.impl;
 
 import com.family.us.domain.UsUser;
 import com.family.us.mapper.UsUserMapper;
-import com.family.us.service.IUsUserService;
+import com.family.us.service.UsUserService;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * 用户Service业务层处理
  * 
- * @author ruoyi
+ * @author 高俊炜
  * @date 2024-04-17
  */
 @Service
-public class UsUserServiceImpl implements IUsUserService
+public class UsUserServiceImpl implements UsUserService
 {
     @Autowired
     private UsUserMapper usUserMapper;
@@ -30,9 +30,24 @@ public class UsUserServiceImpl implements IUsUserService
      * @return 用户
      */
     @Override
-    public UsUser selectUsUserByID(Integer ID)
+    public UsUser selectUsUserByID(Long ID)
     {
         return usUserMapper.selectUsUserByID(ID);
+    }
+
+    @Override
+    public UsUser selectUsUserByAccount(String account) {
+        return usUserMapper.selectUsUserByAccount(account);
+    }
+
+    @Override
+    public UsUser selectUsUserByTel(String tel) {
+        return usUserMapper.selectUsUserByTel(tel);
+    }
+
+    @Override
+    public boolean registerUser(UsUser user) {
+        return usUserMapper.insertUsUser(user);
     }
 
     /**
@@ -73,7 +88,7 @@ public class UsUserServiceImpl implements IUsUserService
      * @return 结果
      */
     @Override
-    public int resetUserPwd(Integer ID, String newPassword) {
+    public int resetUserPwd(Long ID, String newPassword) {
         return usUserMapper.resetUserPwd(ID, newPassword);
     }
 
@@ -84,7 +99,7 @@ public class UsUserServiceImpl implements IUsUserService
      * @return 结果
      */
     @Override
-    public boolean updateUserAvatar(Integer ID, String avatar) {
+    public boolean updateUserAvatar(Long ID, String avatar) {
         return usUserMapper.updateUserAvatar(ID, avatar) > 0;
     }
 
@@ -95,7 +110,7 @@ public class UsUserServiceImpl implements IUsUserService
      * @return 结果
      */
     @Override
-    public boolean updateUserBackground(Integer ID, String background) {
+    public boolean updateUserBackground(Long ID, String background) {
         return usUserMapper.updateUserBackground(ID, background) > 0;
     }
 }

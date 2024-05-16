@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * 测试对象 us_user
  *
- * @author ruoyi
+ * @author 高俊炜
  * @date 2024-04-17
  */
 public class UsUser extends BaseEntity
@@ -21,12 +21,12 @@ public class UsUser extends BaseEntity
 
     /** 编号 ; 主键 */
     @JsonProperty(value = "ID")
-    private Integer ID;
+    private Long ID;
 
     /** 账号 */
     @Excel(name = "账号")
     @JsonProperty(value = "account")
-    private Integer account;
+    private String account;
 
     /** 密码 */
     @Excel(name = "密码")
@@ -48,15 +48,9 @@ public class UsUser extends BaseEntity
     @JsonProperty(value = "sex")
     private Integer sex;
 
-    /** 年龄_起 ; 若是家长，则用年龄段表示，如果是小孩，则要精确年龄（只要这一个字段即可） */
-    @Excel(name = "年龄_起 ; 若是家长，则用年龄段表示，如果是小孩，则要精确年龄", readConverterExp = "只=要这一个字段即可")
-    @JsonProperty(value = "ageBegin")
-    private Integer ageBegin;
-
-    /** 年龄_止 */
-    @Excel(name = "年龄_止")
-    @JsonProperty(value = "ageEnd")
-    private Integer ageEnd;
+    @Excel(name = "出生年份")
+    @JsonProperty(value = "born")
+    private Integer born;
 
     /** 年级 ; 0：未上学；1：小班；2：中班：3：大班；4：一年级；…...小孩角色才显示这一段 */
     @Excel(name = "年级 ; 0：未上学；1：小班；2：中班：3：大班；4：一年级；…...小孩角色才显示这一段")
@@ -202,7 +196,7 @@ public class UsUser extends BaseEntity
     /** 更新用户 */
     @Excel(name = "更新用户")
     @JsonProperty(value = "updateUserId")
-    private Integer updateUserId;
+    private Long updateUserId;
 
     /** 创建时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -215,21 +209,21 @@ public class UsUser extends BaseEntity
     @JsonProperty(value = "flagDelete")
     private Integer flagDelete;
 
-    public void setID(Integer ID)
+    public void setID(Long ID)
     {
         this.ID = ID;
     }
 
-    public Integer getID()
+    public Long getID()
     {
         return ID;
     }
-    public void setAccount(Integer account)
+    public void setAccount(String account)
     {
         this.account = account;
     }
 
-    public Integer getAccount()
+    public String getAccount()
     {
         return account;
     }
@@ -269,23 +263,12 @@ public class UsUser extends BaseEntity
     {
         return sex;
     }
-    public void setAgeBegin(Integer ageBegin)
-    {
-        this.ageBegin = ageBegin;
+    public Integer getBorn() {
+        return born;
     }
 
-    public Integer getAgeBegin()
-    {
-        return ageBegin;
-    }
-    public void setAgeEnd(Integer ageEnd)
-    {
-        this.ageEnd = ageEnd;
-    }
-
-    public Integer getAgeEnd()
-    {
-        return ageEnd;
+    public void setBorn(Integer born) {
+        this.born = born;
     }
     public void setGrade(Integer grade)
     {
@@ -537,12 +520,12 @@ public class UsUser extends BaseEntity
     {
         return createdUserId;
     }
-    public void setUpdateUserId(Integer updateUserId)
+    public void setUpdateUserId(Long updateUserId)
     {
         this.updateUserId = updateUserId;
     }
 
-    public Integer getUpdateUserId()
+    public Long getUpdateUserId()
     {
         return updateUserId;
     }
@@ -574,8 +557,7 @@ public class UsUser extends BaseEntity
                 .append("face", getFace())
                 .append("nickname", getNickname())
                 .append("sex", getSex())
-                .append("ageBegin", getAgeBegin())
-                .append("ageEnd", getAgeEnd())
+                .append("born", getBorn())
                 .append("grade", getGrade())
                 .append("background", getBackground())
                 .append("familyId", getFamilyId())

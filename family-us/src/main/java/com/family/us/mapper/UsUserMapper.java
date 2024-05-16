@@ -2,13 +2,12 @@ package com.family.us.mapper;
 
 import com.family.us.domain.UsUser;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 用户Mapper接口
  * 
- * @author ruoyi
+ * @author 高俊炜
  * @date 2024-04-17
  */
 public interface UsUserMapper 
@@ -19,7 +18,7 @@ public interface UsUserMapper
      * @param ID 用户主键
      * @return 用户
      */
-    public UsUser selectUsUserByID(Integer ID);
+    public UsUser selectUsUserByID(@RequestParam("ID") Long ID);
 
     /**
      * 修改用户
@@ -43,7 +42,7 @@ public interface UsUserMapper
      * @param ID,newPassword 需要用户主键和新密码
      * @return 结果
      */
-    public int resetUserPwd(@Param("ID") Integer ID, @Param("newPassword") String newPassword);
+    public int resetUserPwd(@Param("ID") Long ID, @Param("newPassword") String newPassword);
 
     /**
      * 更换图片
@@ -51,7 +50,7 @@ public interface UsUserMapper
      * @param ID,avatar 需要用户主键和图片路径
      * @return 结果
      */
-    public int updateUserAvatar(@Param("ID") Integer ID, @Param("avatar") String avatar);
+    public int updateUserAvatar(@Param("ID") Long ID, @Param("avatar") String avatar);
 
     /**
      * 更换背景图
@@ -59,5 +58,11 @@ public interface UsUserMapper
      * @param ID,background 需要用户主键和图片路径
      * @return 结果
      */
-    public int updateUserBackground(@Param("ID") Integer ID, @Param("background") String background);
+    public int updateUserBackground(@Param("ID") Long ID, @Param("background") String background);
+
+    public UsUser selectUsUserByAccount(@Param("account") String account);
+
+    public UsUser selectUsUserByTel(@Param("tel") String tel);
+
+    public boolean insertUsUser(UsUser user);
 }

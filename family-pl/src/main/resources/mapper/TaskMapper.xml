@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.pl.mapper.TaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.family.pl.domain.Task">
+            <id property="ID" column="ID" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="notes" column="notes" jdbcType="VARCHAR"/>
+            <result property="task_date" column="task_date" jdbcType="DATE"/>
+            <result property="task_time_begin" column="task_time_begin" jdbcType="TIME"/>
+            <result property="task_time_end" column="task_time_end" jdbcType="TIME"/>
+            <result property="repeat" column="repeat" jdbcType="TINYINT"/>
+            <result property="repeat_end" column="repeat_end" jdbcType="TIMESTAMP"/>
+            <result property="priority" column="priority" jdbcType="TINYINT"/>
+            <result property="is_complete" column="is_complete" jdbcType="TINYINT"/>
+            <result property="is_end" column="is_end" jdbcType="TINYINT"/>
+            <result property="is_label" column="is_label" jdbcType="TINYINT"/>
+            <result property="is_remind" column="is_remind" jdbcType="TINYINT"/>
+            <result property="is_have_child" column="is_have_child" jdbcType="TINYINT"/>
+            <result property="is_timeout" column="is_timeout" jdbcType="TINYINT"/>
+            <result property="father_task_id" column="father_task_id" jdbcType="BIGINT"/>
+            <result property="related_task_id" column="related_task_id" jdbcType="BIGINT"/>
+            <result property="user_id" column="user_id" jdbcType="INTEGER"/>
+            <result property="created_time" column="created_time" jdbcType="TIMESTAMP"/>
+            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="flag_delete" column="flag_delete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,title,notes,
+        task_date,task_time_begin,task_time_end,
+        repeat,repeat_end,priority,
+        is_complete,is_end,is_label,
+        is_remind,is_have_child,is_timeout,
+        father_task_id,related_task_id,user_id,
+        created_time,update_time,flag_delete
+    </sql>
+</mapper>

@@ -2,23 +2,26 @@ package com.family.us.service;
 
 import com.family.us.domain.UsUser;
 
-import java.util.List;
-
 /**
  * 用户Service接口
  * 
- * @author ruoyi
+ * @author 高俊炜
  * @date 2024-04-17
  */
-public interface IUsUserService 
+public interface UsUserService
 {
     /**
      * 查询用户
-     * 
      * @param ID 用户主键
      * @return 用户
      */
-    public UsUser selectUsUserByID(Integer ID);
+    public UsUser selectUsUserByID(Long ID);
+
+    public UsUser selectUsUserByAccount(String account);
+
+    public UsUser selectUsUserByTel(String tel);
+
+    public boolean registerUser(UsUser user);
 
     /**
      * 修改用户
@@ -42,7 +45,7 @@ public interface IUsUserService
      * @param ID,newPassword 需要用户主键和新密码
      * @return 结果
      */
-    public int resetUserPwd(Integer ID, String newPassword);
+    public int resetUserPwd(Long ID, String newPassword);
 
     /**
      * 更换图片
@@ -50,7 +53,7 @@ public interface IUsUserService
      * @param ID,avatar 需要用户主键和图片路径
      * @return 结果
      */
-    public boolean updateUserAvatar(Integer ID, String avatar);
+    public boolean updateUserAvatar(Long ID, String avatar);
 
     /**
      * 更换背景图
@@ -58,5 +61,5 @@ public interface IUsUserService
      * @param ID,background 需要用户主键和图片路径
      * @return 结果
      */
-    public boolean updateUserBackground(Integer ID, String background);
+    public boolean updateUserBackground(Long ID, String background);
 }

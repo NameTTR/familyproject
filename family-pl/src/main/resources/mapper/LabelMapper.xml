@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.family.pl.mapper.LabelMapper">
+
+    <resultMap id="BaseResultMap" type="com.family.pl.domain.Label">
+            <id property="ID" column="ID" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="user_id" column="user_id" jdbcType="INTEGER"/>
+            <result property="created_time" column="created_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ID,name,user_id,
+        created_time
+    </sql>
+</mapper>

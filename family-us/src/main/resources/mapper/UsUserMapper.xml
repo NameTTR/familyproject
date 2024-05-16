@@ -11,8 +11,7 @@
         <result property="face"    column="face"    />
         <result property="nickname"    column="nickname"    />
         <result property="sex"    column="sex"    />
-        <result property="ageBegin"    column="age_begin"    />
-        <result property="ageEnd"    column="age_end"    />
+        <result property="born"    column="born"    />
         <result property="grade"    column="grade"    />
         <result property="background"    column="background"    />
         <result property="familyId"    column="family_id"    />
@@ -48,12 +47,22 @@
     </resultMap>
 
     <sql id="selectUsUserVo">
-        select ID, account, password, face, nickname, sex, age_begin, age_end, grade, background, family_id, role_id, role, district_id, district_name, job_id, job_name, member_type_id, member_name, expiration_time, tel, notice, bells, vibrate, privacy_recommend, privacy_camera, privacy_album, privacy_mike, teenage_mode, balance, cancellation, count_task, count_tool, count_questions, count_test, created_user_id, update_user_id, created_time, update_time, flag_delete from us_user
+        select ID, account, password, face, nickname, sex, born, grade, background, family_id, role_id, role, district_id, district_name, job_id, job_name, member_type_id, member_name, expiration_time, tel, notice, bells, vibrate, privacy_recommend, privacy_camera, privacy_album, privacy_mike, teenage_mode, balance, cancellation, count_task, count_tool, count_questions, count_test, created_user_id, update_user_id, created_time, update_time, flag_delete from us_user
     </sql>
 
     <select id="selectUsUserByID" parameterType="Integer" resultMap="UsUserResult">
         <include refid="selectUsUserVo"/>
         where ID = #{ID}
+    </select>
+
+    <select id="selectUsUserByAccount" parameterType="String" resultMap="UsUserResult">
+        <include refid="selectUsUserVo"/>
+        where account = #{account}
+    </select>
+
+    <select id="selectUsUserByTel" parameterType="String" resultMap="UsUserResult">
+        <include refid="selectUsUserVo"/>
+        where tel = #{tel}
     </select>
 
     <update id="updateUsUser" parameterType="UsUser">
@@ -64,8 +73,7 @@
             <if test="face != null and face != ''">face = #{face},</if>
             <if test="nickname != null and nickname != ''">nickname = #{nickname},</if>
             <if test="sex != null">sex = #{sex},</if>
-            <if test="ageBegin != null">age_begin = #{ageBegin},</if>
-            <if test="ageEnd != null">age_end = #{ageEnd},</if>
+            <if test="born != null">born = #{born},</if>
             <if test="grade != null">grade = #{grade},</if>
             <if test="background != null and background != ''">background = #{background},</if>
             <if test="familyId != null">family_id = #{familyId},</if>
@@ -101,6 +109,58 @@
         </trim>
         where ID = #{ID}
     </update>
+
+    <insert id="insertUsUser" parameterType="UsUser" useGeneratedKeys="true" keyProperty="ID">
+        insert into us_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account != null">account,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="face != null and face != ''">face,</if>
+            <if test="nickname != null and nickname != ''">nickname,</if>
+            <if test="sex != null">sex,</if>
+            <if test="role != null">role,</if>
+            <if test="tel != null">tel,</if>
+            <if test="notice != null">notice,</if>
+            <if test="bells != null">bells,</if>
+            <if test="vibrate != null">vibrate,</if>
+            <if test="privacyRecommend != null">privacy_recommend,</if>
+            <if test="privacyCamera != null">privacy_camera,</if>
+            <if test="privacyAlbum != null">privacy_album,</if>
+            <if test="privacyMike != null">privacy_mike,</if>
+            <if test="teenageMode != null">teenage_mode,</if>
+            <if test="balance != null">balance,</if>
+            <if test="cancellation != null">cancellation,</if>
+            <if test="countTask != null">count_task,</if>
+            <if test="countTool != null">count_tool,</if>
+            <if test="countQuestions != null">count_questions,</if>
+            <if test="countTest != null">count_test,</if>
+            created_user_id,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="account != null">#{account},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="face != null and face != ''">#{face},</if>
+            <if test="nickname != null and nickname != ''">#{nickname},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="role != null">#{role},</if>
+            <if test="tel != null">#{tel},</if>
+            <if test="notice != null">#{notice},</if>
+            <if test="bells != null">#{bells},</if>
+            <if test="vibrate != null">#{vibrate},</if>
+            <if test="privacyRecommend != null">#{privacyRecommend},</if>
+            <if test="privacyCamera != null">#{privacyCamera},</if>
+            <if test="privacyAlbum != null">#{privacyAlbum},</if>
+            <if test="privacyMike != null">#{privacyMike},</if>
+            <if test="teenageMode != null">#{teenageMode},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="cancellation != null">#{cancellation},</if>
+            <if test="countTask != null">#{countTask},</if>
+            <if test="countTool != null">#{countTool},</if>
+            <if test="countQuestions != null">#{countQuestions},</if>
+            <if test="countTest != null">#{countTest},</if>
+            #{ID},
+        </trim>
+    </insert>
 
     <select id="checkTelUnique" parameterType="String" resultMap="UsUserResult">
         select ID, tel from us_user where tel = #{tel} and flag_delete = '0' limit 1
